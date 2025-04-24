@@ -1,39 +1,39 @@
 export interface User {
-  id: string;
-  username: string;
-  color: string;
+  id: string
+  username: string
+  color: string
 }
 
 export interface Board {
-  name: string;
-  activeUsers: User[];
-  userCount: number;
-  createdAt: Date;
+  name: string
+  activeUsers: User[]
+  userCount: number
+  createdAt: Date
 }
 
 export interface DrawingData {
-  points: Point[];
-  color: string;
-  thickness: number;
-  isEraser: boolean;
-  username: string;
-  timestamp: number;
+  points: Point[]
+  color: string
+  thickness: number
+  isEraser: boolean
+  username: string
+  timestamp: number
 }
 
 export interface Point {
-  x: number;
-  y: number;
+  x: number
+  y: number
 }
 
 export interface BoardState {
-  username: string;
-  isJoined: boolean;
-  users: string[];
-  userColors: Record<string, string>;
-  color: string;
-  thickness: number;
-  isDrawing: boolean;
-  mousePosition: Point;
+  username: string
+  isJoined: boolean
+  users: string[]
+  userColors: Record<string, string>
+  color: string
+  thickness: number
+  isDrawing: boolean
+  mousePosition: Point
 }
 
 export type BoardAction =
@@ -45,4 +45,4 @@ export type BoardAction =
   | { type: 'SET_IS_DRAWING'; payload: boolean }
   | { type: 'SET_MOUSE_POSITION'; payload: Point }
   | { type: 'UPDATE_USER_COLOR'; payload: { username: string; color: string } }
-  | { type: 'CLEAR_CANVAS' }; 
+  | { type: 'CLEAR_CANVAS' }

@@ -1,10 +1,9 @@
 interface ActiveUsersProps {
-  users: string[];
-  userColors: Record<string, string>;
+  users: string[]
+  userColors: Record<string, string>
 }
 
 export const ActiveUsers = ({ users = [], userColors }: ActiveUsersProps) => {
-
   return (
     <div className="space-y-4">
       <h2 className="text-m font-semibold text-white">Active Users</h2>
@@ -24,6 +23,5 @@ export const ActiveUsers = ({ users = [], userColors }: ActiveUsersProps) => {
         </div>
       )}
     </div>
-  );
-};
-
+  )
+}

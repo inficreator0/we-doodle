@@ -1,4 +1,4 @@
 // Store user sessions
-const userSessions = new Map();
+const userSessions = new Map()
 
-module.exports = { userSessions }; 
+module.exports = { userSessions }

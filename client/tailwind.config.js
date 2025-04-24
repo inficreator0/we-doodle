@@ -1,13 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       animation: {
-        'float': 'float 6s ease-in-out infinite',
+        float: 'float 6s ease-in-out infinite',
         'fade-in': 'fadeIn 1s ease-out',
       },
       keyframes: {
@@ -16,13 +13,13 @@ export default {
           '50%': { transform: 'translateY(-20px)' },
         },
         fadeIn: {
-          'from': { 
+          from: {
             opacity: '0',
-            transform: 'translateY(20px)'
+            transform: 'translateY(20px)',
           },
-          'to': { 
+          to: {
             opacity: '1',
-            transform: 'translateY(0)'
+            transform: 'translateY(0)',
           },
         },
       },
@@ -32,4 +29,4 @@ export default {
     },
   },
   plugins: [],
-} 
+}

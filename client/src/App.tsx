@@ -1,7 +1,7 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './components/Home';
-import Board from './components/Board';
+import React from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Home from './components/Home'
+import Board from './components/Board'
 
 export const App: React.FC = () => {
   return (
@@ -11,5 +11,5 @@ export const App: React.FC = () => {
         <Route path="/board/:boardName" element={<Board />} />
       </Routes>
     </Router>
-  );
-} 
+  )
+}

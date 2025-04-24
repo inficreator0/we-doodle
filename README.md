@@ -20,6 +20,7 @@ A real-time collaborative whiteboard application where multiple users can draw t
 
 1. Clone the repository
 2. Install dependencies:
+
 ```bash
 npm run install-all
 ```
@@ -27,11 +28,13 @@ npm run install-all
 ## Running the Application
 
 1. Start both the server and client:
+
 ```bash
 npm start
 ```
 
 This will start:
+
 - Backend server on http://localhost:3000
 - Frontend client on http://localhost:5173
 
@@ -46,6 +49,7 @@ This will start:
 ## Tech Stack
 
 - Frontend:
+
   - React
   - Vite
   - Styled Components
@@ -55,4 +59,4 @@ This will start:
   - Node.js
   - Express
   - Socket.IO
-  - CORS 
+  - CORS
