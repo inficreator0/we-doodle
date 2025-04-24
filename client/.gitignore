@@ -1,0 +1,6 @@
+# Client
+/node_modules
+/dist
+/*.log
+.env
+.vite 
