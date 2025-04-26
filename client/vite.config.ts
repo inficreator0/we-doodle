@@ -12,11 +12,11 @@ export default defineConfig({
     port: 4173,
     proxy: {
       '/api': {
-        target: 'https://we-doodle-server.vercel.app/',
+        target: 'https://we-doodle-server.vercel.app',
         changeOrigin: true,
       },
       '/socket.io': {
-        target: 'https://we-doodle-server.vercel.app/',
+        target: 'https://we-doodle-server.vercel.app',
         changeOrigin: true,
         ws: true,
       },
