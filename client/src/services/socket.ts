@@ -11,7 +11,8 @@ export const socket = io(SOCKET_URL, {
   reconnectionDelay: 1000,
   reconnection: true,
   path: '/socket.io',
-
+  forceNew: true,
+  timeout: 10000,
 })
 
 socket.on('connect', () => {
@@ -20,10 +21,16 @@ socket.on('connect', () => {
 
 socket.on('connect_error', (error) => {
   console.error('Socket connection error:', error)
+  if(socket.io.opts.transports[0] === 'websocket') {
+    socket.io.opts.transports = ['polling', 'websocket']
+  }
 })
 
 socket.on('disconnect', (reason) => {
   console.log('Socket disconnected:', reason)
+  if(reason === 'io server disconnect') {
+    socket.connect()
+  }
 })
 
 export const connectSocket = (): void => {

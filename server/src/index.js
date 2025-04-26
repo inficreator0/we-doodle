@@ -6,8 +6,18 @@ import cors from 'cors'
 const app = express()
 const server = createServer(app)
 
+const allowedOrigins = [
+  'https://we-doodle.vercel.app',
+ 'https://we-doodle-server.vercel.app',
+  'http://localhost:5173']
+
 app.use(cors({
-  origin: 'https://we-doodle.vercel.app', 
+  origin: function(origin, callback) {
+    if(!origin || allowedOrigins.includes(origin)) callback(null, true)
+    else {
+      return callback(new Error('CORS'), false)
+    }
+  },
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
@@ -17,7 +27,12 @@ app.use(express.json())
 
 const io = new Server(server, {
   cors: {
-    origin: 'https://we-doodle.vercel.app', 
+    origin: function(origin, callback) {
+      if(!origin || allowedOrigins.includes(origin)) callback(null, true)
+      else {
+        return callback(new Error('CORS'), false)
+      }
+    },
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
@@ -67,9 +82,9 @@ function hasBoardStateChanged(boardName) {
   const hasChanged =
     currentState.userCount !== previousState.userCount ||
     JSON.stringify(currentState.activeUsers) !==
-      JSON.stringify(previousState.activeUsers) ||
+    JSON.stringify(previousState.activeUsers) ||
     JSON.stringify(currentState.userColors) !==
-      JSON.stringify(previousState.userColors)
+    JSON.stringify(previousState.userColors)
 
   previousBoardStates.set(boardName, currentState)
 
@@ -279,8 +294,7 @@ io.on('connection', (socket) => {
 
     // Log the drawing event for debugging
     console.log(
-      `Drawing event from ${
-        drawingData.username || 'unknown user'
+      `Drawing event from ${drawingData.username || 'unknown user'
       } in board ${currentBoardName}`
     )
 
