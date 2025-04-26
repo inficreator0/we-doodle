@@ -12,6 +12,7 @@ export const socket = io(SOCKET_URL, {
   reconnection: true,
   path: '/socket.io',
   forceNew: true,
+  debug: true,
   timeout: 10000,
 })
 
