@@ -34,7 +34,6 @@ const userSessions = new Map()
 // Store previous board states for comparison
 const previousBoardStates = new Map()
 
-// Helper function to get or create a board
 function getBoard(boardName) {
   if (!boards.has(boardName)) {
     console.log('Creating new board:', boardName)
@@ -48,7 +47,6 @@ function getBoard(boardName) {
   return boards.get(boardName)
 }
 
-// Helper function to check if board state has changed
 function hasBoardStateChanged(boardName) {
   const board = boards.get(boardName)
   if (!board) return false
@@ -61,13 +59,11 @@ function hasBoardStateChanged(boardName) {
 
   const previousState = previousBoardStates.get(boardName)
 
-  // If no previous state exists, this is a new board
   if (!previousState) {
     previousBoardStates.set(boardName, currentState)
     return true
   }
 
-  // Check if any relevant state has changed
   const hasChanged =
     currentState.userCount !== previousState.userCount ||
     JSON.stringify(currentState.activeUsers) !==
@@ -75,13 +71,11 @@ function hasBoardStateChanged(boardName) {
     JSON.stringify(currentState.userColors) !==
       JSON.stringify(previousState.userColors)
 
-  // Update previous state
   previousBoardStates.set(boardName, currentState)
 
   return hasChanged
 }
 
-// Helper function to broadcast user list
 function broadcastUserList(boardName) {
   const board = getBoard(boardName)
   const userList = Array.from(board.activeUsers.values())
@@ -89,7 +83,6 @@ function broadcastUserList(boardName) {
   io.to(boardName).emit('user-list', userList)
 }
 
-// Helper function to check and remove empty boards
 function checkAndRemoveEmptyBoard(boardName) {
   const board = boards.get(boardName)
   if (board && board.activeUsers.size === 0) {
@@ -100,7 +93,6 @@ function checkAndRemoveEmptyBoard(boardName) {
   }
 }
 
-// Helper function to broadcast board updates to specific clients
 function sendBoardUpdatesToClient(socket) {
   const boardsList = Array.from(boards.entries()).map(([name, board]) => ({
     name,
@@ -111,9 +103,7 @@ function sendBoardUpdatesToClient(socket) {
   socket.emit('boards-update', boardsList)
 }
 
-// Helper function to broadcast board updates to all clients
 function broadcastBoardUpdates() {
-  // Only broadcast if any board has changed
   let hasAnyBoardChanged = false
 
   const boardsList = Array.from(boards.entries()).map(([name, board]) => {
@@ -130,7 +120,6 @@ function broadcastBoardUpdates() {
     }
   })
 
-  // Only broadcast if there are actual changes
   if (hasAnyBoardChanged) {
     console.log('Broadcasting board updates due to state changes')
     io.emit('boards-update', boardsList)
@@ -139,10 +128,8 @@ function broadcastBoardUpdates() {
   }
 }
 
-// Get list of available boards
 app.get('/api/boards', (req, res) => {
   console.log('Available boards:', Array.from(boards.keys()))
-  // Remove boards with no active users before responding
   for (const name of Array.from(boards.keys())) {
     checkAndRemoveEmptyBoard(name)
   }
