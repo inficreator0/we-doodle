@@ -12,13 +12,24 @@ const allowedOrigins = [
   'http://localhost:5173']
 
 app.use(cors({
-  origin: function(origin, callback) {
-    if(!origin || allowedOrigins.includes(origin)) callback(null, true)
-    else {
-      return callback(new Error('CORS'), false)
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true); 
+    
+    try {
+      const originUrl = new URL(origin);
+      const baseOrigin = `${originUrl.protocol}//${originUrl.host}`;
+      
+      // Check if base origin is allowed
+      if (allowedOrigins.includes(baseOrigin)) {
+        return callback(null, true);
+      }
+    } catch (e) {
+      console.error('Error parsing origin:', e);
     }
+    
+    callback(new Error('Not allowed by CORS'));
   },
-  methods: ['GET', 'POST'],
+  methods: ['GET', 'POST', "OPTIONS"],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
 }))
@@ -27,13 +38,24 @@ app.use(express.json())
 
 const io = new Server(server, {
   cors: {
-    origin: function(origin, callback) {
-      if(!origin || allowedOrigins.includes(origin)) callback(null, true)
-      else {
-        return callback(new Error('CORS'), false)
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true); 
+      
+      try {
+        const originUrl = new URL(origin);
+        const baseOrigin = `${originUrl.protocol}//${originUrl.host}`;
+        
+        // Check if base origin is allowed
+        if (allowedOrigins.includes(baseOrigin)) {
+          return callback(null, true);
+        }
+      } catch (e) {
+        console.error('Error parsing origin:', e);
       }
+      
+      callback(new Error('Not allowed by CORS'));
     },
-    methods: ['GET', 'POST'],
+    methods: ['GET', 'POST', "OPTIONS"],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
     transports: ['websocket', 'polling'],
