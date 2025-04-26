@@ -1,16 +1,19 @@
 {
   "name": "we-doodle-server",
   "version": "1.0.0",
+  "type": "module",
   "description": "Backend server for real-time whiteboard",
   "main": "src/index.js",
   "scripts": {
-    "dev": "nodemon src/index.js",
-    "start": "node src/index.js"
+    "dev": "NODE_ENV=development node -r dotenv/config src/index.js",
+    "start": "node src/index.js",
+    "prod": "NODE_ENV=production node -r dotenv/config src/index.js"
   },
   "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.1",
     "express": "^4.18.2",
-    "socket.io": "^4.7.4",
-    "cors": "^2.8.5"
+    "socket.io": "^4.7.4"
   },
   "devDependencies": {
     "nodemon": "^3.0.3"

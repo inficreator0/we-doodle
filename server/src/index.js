@@ -1,16 +1,26 @@
-const express = require('express')
-const http = require('http')
-const { Server } = require('socket.io')
-const cors = require('cors')
+import express from 'express'
+import { createServer } from 'http'
+import { Server } from 'socket.io'
+import cors from 'cors'
+import dotenv from 'dotenv'
+
+// Load environment variables based on NODE_ENV
+dotenv.config({
+  path: process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development'
+})
 
 const app = express()
-app.use(cors())
+const server = createServer(app)
+
+app.use(cors({
+  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  methods: ['GET', 'POST']
+}))
 app.use(express.json()) // Add JSON body parser
 
-const server = http.createServer(app)
 const io = new Server(server, {
   cors: {
-    origin: "https://we-doodle.vercel.app", // Vite's default port
+    origin: process.env.CLIENT_URL || 'http://localhost:5173',
     methods: ['GET', 'POST'],
   },
 })

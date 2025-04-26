@@ -49,10 +49,9 @@ This will start:
 ## Tech Stack
 
 - Frontend:
-
   - React
   - Vite
-  - Styled Components
+  - Tailwind CSS
   - Socket.IO Client
 
 - Backend:
