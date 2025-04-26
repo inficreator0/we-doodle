@@ -4,7 +4,7 @@ import { DrawingData } from '../types'
 const SOCKET_URL = 'https://we-doodle-server.vercel.app'
 
 export const socket = io(SOCKET_URL, {
-  autoConnect: false,
+  autoConnect: true,
   transports: ['websocket', 'polling'],
   withCredentials: true,
   reconnectionAttempts: 5,
