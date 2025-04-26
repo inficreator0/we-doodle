@@ -14,7 +14,9 @@ const server = createServer(app)
 
 app.use(cors({
   origin: 'https://we-doodle.vercel.app', //process.env.CLIENT_URL || 'http://localhost:5173',
-  methods: ['GET', 'POST']
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
 }))
 app.use(express.json()) // Add JSON body parser
 
@@ -22,7 +24,12 @@ const io = new Server(server, {
   cors: {
     origin: 'https://we-doodle.vercel.app', //process.env.CLIENT_URL || 'http://localhost:5173',
     methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+    transports: ['websocket', 'polling'],
   },
+  path: '/socket.io',
+  allowEIO3: true,
 })
 
 // Store boards by name

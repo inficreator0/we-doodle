@@ -5,6 +5,13 @@ const SOCKET_URL = 'https://we-doodle-server.vercel.app'
 
 export const socket = io(SOCKET_URL, {
   autoConnect: false,
+  transports: ['websocket', 'polling'],
+  withCredentials: true,
+  reconnectionAttempts: 5,
+  reconnectionDelay: 1000,
+  reconnection: true,
+  path: '/socket.io',
+
 })
 
 socket.on('connect', () => {
