@@ -2,27 +2,22 @@ import express from 'express'
 import { createServer } from 'http'
 import { Server } from 'socket.io'
 import cors from 'cors'
-import dotenv from 'dotenv'
-
-// Load environment variables based on NODE_ENV
-dotenv.config({
-  path: process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development'
-})
 
 const app = express()
 const server = createServer(app)
 
 app.use(cors({
-  origin: 'https://we-doodle.vercel.app', //process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: 'https://we-doodle.vercel.app', 
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
 }))
-app.use(express.json()) // Add JSON body parser
+
+app.use(express.json())
 
 const io = new Server(server, {
   cors: {
-    origin: 'https://we-doodle.vercel.app', //process.env.CLIENT_URL || 'http://localhost:5173',
+    origin: 'https://we-doodle.vercel.app', 
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
