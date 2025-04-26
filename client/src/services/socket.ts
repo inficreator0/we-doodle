@@ -1,7 +1,7 @@
 import { io } from 'socket.io-client'
 import { DrawingData } from '../types'
 
-const SOCKET_URL = 'https://we-doodle-server.vercel.app/'
+const SOCKET_URL = 'https://we-doodle-server.vercel.app'
 
 export const socket = io(SOCKET_URL, {
   autoConnect: false,
