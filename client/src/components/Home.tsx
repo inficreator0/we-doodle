@@ -18,7 +18,7 @@ const Home = () => {
       try {
         setLoading(true)
         setError(null)
-        const response = await fetch('http://localhost:3000/api/boards')
+        const response = await fetch('https://we-doodle-server.vercel.app/api/boards')
         if (!response.ok) {
           throw new Error('Failed to fetch boards')
         }
@@ -61,7 +61,7 @@ const Home = () => {
       setIsCreating(true)
       setError(null)
       console.log('Creating board:', newBoardName)
-      const response = await fetch('http://localhost:3000/api/boards', {
+      const response = await fetch('https://we-doodle-server.vercel.app/api/boards', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

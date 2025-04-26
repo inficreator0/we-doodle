@@ -13,14 +13,14 @@ const app = express()
 const server = createServer(app)
 
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: 'https://we-doodle.vercel.app', //process.env.CLIENT_URL || 'http://localhost:5173',
   methods: ['GET', 'POST']
 }))
 app.use(express.json()) // Add JSON body parser
 
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL || 'http://localhost:5173',
+    origin: 'https://we-doodle.vercel.app', //process.env.CLIENT_URL || 'http://localhost:5173',
     methods: ['GET', 'POST'],
   },
 })
