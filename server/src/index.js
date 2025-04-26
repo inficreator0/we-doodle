@@ -61,7 +61,7 @@ const io = new Server(server, {
     transports: ['websocket', 'polling'],
   },
   path: '/socket.io',
-  allowEIO3: true,
+  allowEIO3: false,
 })
 
 // Store boards by name
