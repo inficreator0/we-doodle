@@ -92,6 +92,8 @@ const Home = () => {
   const handleJoinBoard = (boardName: string) => {
     console.log('Joining board:', boardName)
     navigate(`/board/${boardName}`)
+    socket.emit('join-board', boardName)
+  
   }
 
   return (
