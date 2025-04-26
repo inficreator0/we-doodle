@@ -4,8 +4,8 @@
   "description": "Real-time collaborative whiteboard application",
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "cd server && npm run dev",
-    "client": "cd client && npm run dev",
+    "server": "cd server && npm run start",
+    "client": "cd client && npm run preview",
     "install-all": "npm install && cd client && npm install && cd ../server && npm install",
     "format": "prettier --write ."
   },
