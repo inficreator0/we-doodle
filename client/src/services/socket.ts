@@ -22,9 +22,10 @@ socket.on('connect', () => {
 
 socket.on('connect_error', (error) => {
   console.error('Socket connection error:', error)
-  if(socket.io.opts.transports[0] === 'websocket') {
-    socket.io.opts.transports = ['polling', 'websocket']
-  }
+  // if(socket.io.opts.transports[0] === 'websocket') {
+  //   socket.io.opts.transports = ['polling', 'websocket']
+  // }
+  socket.connect()
 })
 
 socket.on('disconnect', (reason) => {
